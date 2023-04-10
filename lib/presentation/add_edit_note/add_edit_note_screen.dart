@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:note_app_clone/domain/model/note.dart';
@@ -22,6 +24,7 @@ class AddEditNoteScreen extends StatefulWidget {
 class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
+  StreamSubscription? _streamSubscription;
 
   final List<Color> noteColors = [
     roseBud,
@@ -32,10 +35,26 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() {
+      final viewModel = context.read<AddEditNoteViewModel>();
+
+      _streamSubscription = viewModel.eventStream.listen((event) {
+        event.when(saveNote: () {
+          context.pop(true);
+        });
+      });
+    });
+  }
+
+  @override
   void dispose() {
     super.dispose();
     _titleController.dispose();
     _contentController.dispose();
+    _streamSubscription?.cancel();
   }
 
   @override
@@ -59,8 +78,6 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
               _contentController.text,
             ),
           );
-
-          context.pop();
         },
         child: const Icon(Icons.save),
       ),

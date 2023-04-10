@@ -1,17 +1,24 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:note_app_clone/domain/model/note.dart';
-import 'package:note_app_clone/domain/repository/note_repository.dart';
+import 'package:note_app_clone/domain/use_case/use_cases.dart';
 import 'package:note_app_clone/presentation/add_edit_note/add_edit_note_event.dart';
+import 'package:note_app_clone/presentation/add_edit_note/add_edit_note_ui_event.dart';
 import 'package:note_app_clone/ui/colors.dart';
 
 class AddEditNoteViewModel with ChangeNotifier {
-  final NoteRepository repository;
+  final UseCases useCases;
 
   int _color = roseBud.value;
 
   int get color => _color;
 
-  AddEditNoteViewModel(this.repository);
+  final _eventStreamController = StreamController<AddEditNoteUiEvent>();
+
+  Stream<AddEditNoteUiEvent> get eventStream => _eventStreamController.stream;
+
+  AddEditNoteViewModel(this.useCases);
 
   void onEvent(AddEditNoteEvent event) {
     event.when(
@@ -27,7 +34,7 @@ class AddEditNoteViewModel with ChangeNotifier {
 
   Future<void> _saveNote(int? id, String title, String content) async {
     if (id == null) {
-      await repository.insertNote(
+      await useCases.addNoteUseCase.execute(
         Note(
           title: title,
           content: content,
@@ -36,7 +43,7 @@ class AddEditNoteViewModel with ChangeNotifier {
         ),
       );
     } else {
-      await repository.updateNote(
+      await useCases.updateNoteUseCase.execute(
         Note(
           id: id,
           title: title,
@@ -46,5 +53,7 @@ class AddEditNoteViewModel with ChangeNotifier {
         ),
       );
     }
+
+    _eventStreamController.add(const AddEditNoteUiEvent.saveNote());
   }
 }

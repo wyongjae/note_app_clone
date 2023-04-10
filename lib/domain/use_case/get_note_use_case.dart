@@ -1,13 +1,12 @@
 import 'package:note_app_clone/domain/model/note.dart';
 import 'package:note_app_clone/domain/repository/note_repository.dart';
 
-class GetNotes {
+class GetNoteUseCase {
   final NoteRepository repository;
 
-  GetNotes(this.repository);
+  GetNoteUseCase(this.repository);
 
-  Future<List<Note>> execute() async {
-    List<Note> notes = await repository.getNotes();
-    return notes;
+  Future<Note?> execute(int id) async {
+    return await repository.getNoteById(id);
   }
 }

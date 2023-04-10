@@ -3,9 +3,9 @@ import 'package:note_app_clone/di/di_setup.dart';
 import 'package:note_app_clone/routes.dart';
 import 'package:note_app_clone/ui/colors.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  diSetup();
+  await diSetup();
 
   runApp(const MyApp());
 }
