@@ -69,6 +69,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
             const snackBar =
                 SnackBar(content: Text("The title or content can't be empty."));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            return;
           }
 
           viewModel.onEvent(
