@@ -43,22 +43,27 @@ class NotesScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: state.notes
-              .map((note) => NoteItem(
-                    note: note,
-                    onDeleteTap: () {
-                      viewModel.onEvent(NotesEvent.deleteNote(note));
-
-                      final snackBar = SnackBar(
-                        content: const Text('Note is deleted.'),
-                        action: SnackBarAction(
-                          label: 'Undo',
-                          onPressed: () {
-                            viewModel.onEvent(const NotesEvent.restoreNote());
-                          },
-                        ),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              .map((note) => GestureDetector(
+                    onTap: () {
+                      context.push('/addEditScreen');
                     },
+                    child: NoteItem(
+                      note: note,
+                      onDeleteTap: () {
+                        viewModel.onEvent(NotesEvent.deleteNote(note));
+
+                        final snackBar = SnackBar(
+                          content: const Text('Note is deleted.'),
+                          action: SnackBarAction(
+                            label: 'Undo',
+                            onPressed: () {
+                              viewModel.onEvent(const NotesEvent.restoreNote());
+                            },
+                          ),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
+                    ),
                   ))
               .toList(),
         ),

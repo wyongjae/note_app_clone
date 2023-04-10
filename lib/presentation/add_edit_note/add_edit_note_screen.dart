@@ -38,6 +38,11 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   void initState() {
     super.initState();
 
+    if (widget.note != null) {
+      _titleController.text = widget.note!.title;
+      _contentController.text = widget.note!.content;
+    }
+
     Future.microtask(() {
       final viewModel = context.read<AddEditNoteViewModel>();
 
@@ -72,13 +77,11 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
             return;
           }
 
-          viewModel.onEvent(
-            AddEditNoteEvent.saveNote(
-              widget.note == null ? null : widget.note!.id,
-              _titleController.text,
-              _contentController.text,
-            ),
-          );
+          viewModel.onEvent(AddEditNoteEvent.saveNote(
+            widget.note == null ? null : widget.note!.id,
+            _titleController.text,
+            _contentController.text,
+          ));
         },
         child: const Icon(Icons.save),
       ),
