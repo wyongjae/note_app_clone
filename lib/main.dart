@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:note_app_clone/presentation/notes/notes_screen.dart';
+import 'package:note_app_clone/routes.dart';
 import 'package:note_app_clone/ui/colors.dart';
 
 void main() {
@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: Colors.white,
@@ -26,7 +27,6 @@ class MyApp extends StatelessWidget {
               backgroundColor: darkGray,
             ),
       ),
-      home: const NotesScreen(),
     );
   }
 }

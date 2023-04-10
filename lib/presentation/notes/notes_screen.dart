@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:note_app_clone/domain/model/note.dart';
 import 'package:note_app_clone/presentation/notes/components/note_item.dart';
 import 'package:note_app_clone/ui/colors.dart';
@@ -25,7 +26,9 @@ class NotesScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.push('/addEditScreen');
+        },
         child: const Icon(Icons.add),
       ),
       body: Padding(
