@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:note_app_clone/di/di_setup.dart';
 import 'package:note_app_clone/routes.dart';
 import 'package:note_app_clone/ui/colors.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  diSetup();
+
   runApp(const MyApp());
 }
 
