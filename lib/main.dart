@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       routerConfig: router,
       title: 'Flutter Demo',
       theme: ThemeData(
+        unselectedWidgetColor: Colors.white,
         primaryColor: Colors.white,
         canvasColor: darkGray,
         floatingActionButtonTheme:
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
         appBarTheme: Theme.of(context).appBarTheme.copyWith(
               backgroundColor: darkGray,
             ),
+        textTheme: Theme.of(context).textTheme.apply(
+          bodyColor: Colors.white
+        ),
       ),
     );
   }
