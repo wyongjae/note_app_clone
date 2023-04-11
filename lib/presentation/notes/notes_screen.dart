@@ -44,8 +44,12 @@ class NotesScreen extends StatelessWidget {
         child: ListView(
           children: state.notes
               .map((note) => GestureDetector(
-                    onTap: () {
-                      context.push('/addEditScreen');
+                    onTap: () async {
+                      bool? isSaved = await context.push('/addEditScreen');
+
+                      if (isSaved != null && isSaved) {
+                        viewModel.onEvent(const NotesEvent.loadNotes());
+                      }
                     },
                     child: NoteItem(
                       note: note,

@@ -34,7 +34,7 @@ class AddEditNoteViewModel with ChangeNotifier {
 
   Future<void> _saveNote(int? id, String title, String content) async {
     if (id == null) {
-      await useCases.addNoteUseCase.execute(
+      await useCases.addNote.execute(
         Note(
           title: title,
           content: content,
@@ -43,7 +43,7 @@ class AddEditNoteViewModel with ChangeNotifier {
         ),
       );
     } else {
-      await useCases.updateNoteUseCase.execute(
+      await useCases.updateNote.execute(
         Note(
           id: id,
           title: title,

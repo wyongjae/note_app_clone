@@ -5,17 +5,17 @@ import 'package:note_app_clone/domain/use_case/get_notes_use_case.dart';
 import 'package:note_app_clone/domain/use_case/update_note_use_case.dart';
 
 class UseCases {
-  final AddNoteUseCase addNoteUseCase;
-  final DeleteNoteUseCase deleteNoteUseCase;
-  final GetNoteUseCase getNoteUseCase;
-  final GetNotesUseCase getNotesUseCase;
-  final UpdateNoteUseCase updateNoteUseCase;
+  final AddNoteUseCase addNote;
+  final DeleteNoteUseCase deleteNote;
+  final GetNoteUseCase getNote;
+  final GetNotesUseCase getNotes;
+  final UpdateNoteUseCase updateNote;
 
   UseCases({
-    required this.addNoteUseCase,
-    required this.deleteNoteUseCase,
-    required this.getNoteUseCase,
-    required this.getNotesUseCase,
-    required this.updateNoteUseCase,
+    required this.addNote,
+    required this.deleteNote,
+    required this.getNote,
+    required this.getNotes,
+    required this.updateNote,
   });
 }

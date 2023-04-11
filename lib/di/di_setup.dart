@@ -29,10 +29,10 @@ Future<void> diSetup() async {
       () => NoteRepositoryImpl(getIt<NoteDbHelper>()));
 
   getIt.registerLazySingleton<UseCases>(() => UseCases(
-        addNoteUseCase: AddNoteUseCase(getIt<NoteRepository>()),
-        deleteNoteUseCase: DeleteNoteUseCase(getIt<NoteRepository>()),
-        getNoteUseCase: GetNoteUseCase(getIt<NoteRepository>()),
-        getNotesUseCase: GetNotesUseCase(getIt<NoteRepository>()),
-        updateNoteUseCase: UpdateNoteUseCase(getIt<NoteRepository>()),
+        addNote: AddNoteUseCase(getIt<NoteRepository>()),
+        deleteNote: DeleteNoteUseCase(getIt<NoteRepository>()),
+        getNote: GetNoteUseCase(getIt<NoteRepository>()),
+        getNotes: GetNotesUseCase(getIt<NoteRepository>()),
+        updateNote: UpdateNoteUseCase(getIt<NoteRepository>()),
       ));
 }
