@@ -18,7 +18,8 @@ final router = GoRouter(
       ),
     ),
     GoRoute(
-      path: '/addEditScreen',
+      name: '/addEditScreen',
+      path: '/addEditScreen/:noteId',
       builder: (context, state) => ChangeNotifierProvider(
         create: (_) => AddEditNoteViewModel(getIt<UseCases>()),
         child: const AddEditNoteScreen(),

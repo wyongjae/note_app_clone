@@ -11,10 +11,12 @@ import 'add_edit_note_event.dart';
 
 class AddEditNoteScreen extends StatefulWidget {
   final Note? note;
+  final int? id;
 
   const AddEditNoteScreen({
     Key? key,
     this.note,
+    this.id,
   }) : super(key: key);
 
   @override
@@ -38,7 +40,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   void initState() {
     super.initState();
 
-    if (widget.note != null) {
+    if (widget.note?.id != null) {
       _titleController.text = widget.note!.title;
       _contentController.text = widget.note!.content;
     }

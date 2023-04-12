@@ -10,9 +10,9 @@ class NotesViewModel with ChangeNotifier {
   final UseCases useCases;
 
   NotesState _state = const NotesState(
-    notes: [],
-    noteOrder: NoteOrder.date(OrderType.descending()),
-    isOrderSectionVisible: false,
+      notes: [],
+      noteOrder: NoteOrder.date(OrderType.descending()),
+      isOrderSectionVisible: false,
   );
 
   NotesState get state => _state;
