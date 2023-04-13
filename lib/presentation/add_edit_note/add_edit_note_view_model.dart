@@ -14,6 +14,10 @@ class AddEditNoteViewModel with ChangeNotifier {
 
   int get color => _color;
 
+  set noteColor(int color) {
+    _color = color;
+  }
+
   final _eventStreamController = StreamController<AddEditNoteUiEvent>();
 
   Stream<AddEditNoteUiEvent> get eventStream => _eventStreamController.stream;

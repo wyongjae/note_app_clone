@@ -38,14 +38,9 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   void initState() {
     super.initState();
 
-    if (widget.note != null) {
-      _titleController.text = widget.note!.title;
-      _contentController.text = widget.note!.content;
-    }
+    final viewModel = context.read<AddEditNoteViewModel>();
 
     Future.microtask(() {
-      final viewModel = context.read<AddEditNoteViewModel>();
-
       _streamSubscription = viewModel.eventStream.listen((event) {
         event.when(
           saveNote: () {
@@ -54,6 +49,12 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
         );
       });
     });
+
+    if (widget.note != null) {
+      _titleController.text = widget.note!.title;
+      _contentController.text = widget.note!.content;
+      viewModel.noteColor = widget.note!.color;
+    }
   }
 
   @override
@@ -90,7 +91,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
       body: SafeArea(
         child: AnimatedContainer(
           padding: const EdgeInsets.all(20),
-          color: Color(widget.note!.color),
+          color: Color(viewModel.color),
           duration: const Duration(milliseconds: 500),
           child: ListView(
             children: [
