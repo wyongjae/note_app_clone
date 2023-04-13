@@ -6,8 +6,6 @@ import 'package:note_app_clone/presentation/notes/notes_event.dart';
 import 'package:note_app_clone/presentation/notes/notes_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../add_edit_note/add_edit_note_screen.dart';
-
 class NotesScreen extends StatelessWidget {
   const NotesScreen({Key? key}) : super(key: key);
 
@@ -36,7 +34,9 @@ class NotesScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          bool? isSaved = await context.push(('/addEditScreen/:note'));
+          bool? isSaved = await context.push(
+            '/addEditScreen',
+          );
 
           if (isSaved != null && isSaved) {
             viewModel.onEvent(const NotesEvent.loadNotes());
@@ -61,9 +61,9 @@ class NotesScreen extends StatelessWidget {
           ...state.notes
               .map((note) => GestureDetector(
                     onTap: () async {
-                      bool? isSaved = await context.pushNamed(
+                      bool? isSaved = await context.push(
                         '/addEditScreen',
-                        params: {'noteId': note.id.toString()},
+                        extra: note,
                       );
 
                       if (isSaved != null && isSaved) {
@@ -92,19 +92,5 @@ class NotesScreen extends StatelessWidget {
         ]),
       ),
     );
-  }
-}
-
-@immutable
-class AddEditNoteScreenRoute extends GoRouteData {
-  final int? id;
-
-  const AddEditNoteScreenRoute({
-    this.id,
-  });
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const AddEditNoteScreen();
   }
 }

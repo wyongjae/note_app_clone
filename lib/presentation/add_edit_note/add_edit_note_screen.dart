@@ -11,12 +11,10 @@ import 'add_edit_note_event.dart';
 
 class AddEditNoteScreen extends StatefulWidget {
   final Note? note;
-  final int? id;
 
   const AddEditNoteScreen({
     Key? key,
     this.note,
-    this.id,
   }) : super(key: key);
 
   @override
@@ -40,7 +38,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   void initState() {
     super.initState();
 
-    if (widget.note?.id != null) {
+    if (widget.note != null) {
       _titleController.text = widget.note!.title;
       _contentController.text = widget.note!.content;
     }
@@ -49,9 +47,11 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
       final viewModel = context.read<AddEditNoteViewModel>();
 
       _streamSubscription = viewModel.eventStream.listen((event) {
-        event.when(saveNote: () {
-          context.pop(true);
-        });
+        event.when(
+          saveNote: () {
+            context.pop(true);
+          },
+        );
       });
     });
   }
@@ -90,7 +90,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
       body: SafeArea(
         child: AnimatedContainer(
           padding: const EdgeInsets.all(20),
-          color: Color(viewModel.color),
+          color: Color(widget.note!.color),
           duration: const Duration(milliseconds: 500),
           child: ListView(
             children: [
