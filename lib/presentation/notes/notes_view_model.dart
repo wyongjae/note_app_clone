@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:note_app_clone/domain/model/note.dart';
 import 'package:note_app_clone/domain/use_case/use_cases.dart';
 import 'package:note_app_clone/domain/util/note_order.dart';
@@ -6,13 +7,14 @@ import 'package:note_app_clone/domain/util/order_type.dart';
 import 'package:note_app_clone/presentation/notes/notes_event.dart';
 import 'package:note_app_clone/presentation/notes/notes_state.dart';
 
+@injectable
 class NotesViewModel with ChangeNotifier {
   final UseCases useCases;
 
   NotesState _state = const NotesState(
-      notes: [],
-      noteOrder: NoteOrder.date(OrderType.descending()),
-      isOrderSectionVisible: false,
+    notes: [],
+    noteOrder: NoteOrder.date(OrderType.descending()),
+    isOrderSectionVisible: false,
   );
 
   NotesState get state => _state;

@@ -47,6 +47,8 @@ dependencies:
   get_it: ^7.2.0
   go_router_builder: ^1.2.0
   mockito: ^5.4.0
+  injectable: ^2.1.1
+  injectable_generator: ^2.1.5
 
 dev_dependencies:
   flutter_test:

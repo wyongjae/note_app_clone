@@ -1,7 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:note_app_clone/di/di_setup.dart';
 import 'package:note_app_clone/domain/model/note.dart';
-import 'package:note_app_clone/domain/use_case/use_cases.dart';
 import 'package:note_app_clone/presentation/add_edit_note/add_edit_note_screen.dart';
 import 'package:note_app_clone/presentation/add_edit_note/add_edit_note_view_model.dart';
 import 'package:note_app_clone/presentation/notes/notes_screen.dart';
@@ -14,7 +13,7 @@ final router = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) => ChangeNotifierProvider(
-        create: (_) => NotesViewModel(getIt<UseCases>()),
+        create: (_) => getIt<NotesViewModel>(),
         child: const NotesScreen(),
       ),
     ),
@@ -24,7 +23,7 @@ final router = GoRouter(
         Note? note = state.extra as Note?;
 
         return ChangeNotifierProvider(
-          create: (_) => AddEditNoteViewModel(getIt<UseCases>()),
+          create: (_) => getIt<AddEditNoteViewModel>(),
           child: AddEditNoteScreen(
             note: note,
           ),
